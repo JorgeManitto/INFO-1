@@ -1,0 +1,54 @@
+#include <stdio.h>
+struct info{
+    short legajo;
+    char nya[51];
+};
+short buscar(struct info *,short ,short );
+int main(void)
+{
+
+    struct info alumno[3];
+    short tam=3;
+    short i=0,buscado,x;
+
+    for(i=0;i<tam;i++){
+        printf("Legajo:");
+        scanf("%hd",&alumno[i].legajo);
+        printf("Nombre y apellido:");
+        fflush(stdin);
+        fgets(alumno[i].nya,51,stdin);
+        fflush(stdin);
+    }
+    printf("buscar legajo:");
+    scanf("%hd",&buscado);
+
+   x=buscar(alumno,tam,buscado);
+    if(x>=0){
+    printf("encontrado el valor:%hd en el indice : %hd  nombre:%s\n",alumno[x].legajo,x,alumno[x].nya);
+
+    }
+    if(x<0){
+        printf("no encontrado:%hd\n",x);
+    }
+
+
+
+    return 0;
+}
+short buscar (struct info *v, short tam, short buscado){
+                                                            //-1 no encontro
+                                                            // 0>= encontro
+
+    short i=0;
+
+    while(buscado!=v[i].legajo&& i<tam){
+        i++;
+
+    }
+    if(v[i].legajo==buscado){
+        return i;
+    } else {
+        return(-1);
+    }
+
+}
