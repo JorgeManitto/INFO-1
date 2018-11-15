@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <string.h>
+#define tam 3
+struct dato {
+    char nya [40];
+    short edad;
+    float sueldo;
+};
+void busqueda(struct dato*,char *);
+void  ordenar(struct dato *);
+int main(void)
+{
+    struct dato alumno[tam];
+    char buscado [40];
+    short i;
+
+    for(i=0;i<tam;i++){
+        printf("Ingrese nombre y apellido:");
+        fflush(stdin);
+        gets(alumno[i].nya);
+        fflush(stdin);
+        printf("Ingrese edad:");
+        scanf("%hd",&alumno[i].edad);
+        printf("Ingrese sueldo:");
+        scanf("%f",&alumno[i].sueldo);
+
+    }
+    ordenar(alumno);
+    for(i=0;i<tam;i++){
+        printf("Nombre y apellido:%s  Edad:%hd  Sueldo:%.2f\n",alumno[i].nya,alumno[i].edad,alumno[i].sueldo);
+    }
+    printf("ingresar busqueda:");
+    fflush(stdin);
+    gets(buscado);
+    busqueda(alumno,buscado);
+
+    return 0;
+}
+
+void ordenar (struct dato * x){
+   struct dato aux;
+   short i,R=0,no_ordenado;
+   do{
+       R++;
+       no_ordenado=0;
+       for(i=0;i<tam-R;i++){
+           if(x[i].edad>x[i+1].edad){
+               aux=x[i];
+               x[i]=x[i+1];
+               x[i+1]=aux;
+               no_ordenado=1;
+           }
+       }
+
+   }while(no_ordenado);
+
+
+
+}
+void busqueda(struct dato *x,char *buscado){
+    short i=0,flag =0;
+
+    for(i=0;i<tam;i++){
+        if(strcmp(x[i].nya,buscado)==0){
+            printf("Edad:%hd Sueldo:%.2f\n",x[i].edad,x[i].sueldo);
+            flag=1;
+        }
+    }
+    if(flag==0){
+        printf("No encontrado.\n");
+    }
+
+
+}
